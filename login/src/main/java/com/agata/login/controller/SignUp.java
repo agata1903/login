@@ -13,17 +13,21 @@ import java.util.List;
 @RequestMapping("/signup")
 public class SignUp {
 
-    private final UserRepository userRepository;
-    public SignUp(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-    @PostMapping
-    public User Save(@RequestBody @Valid User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "E-mail already exists");
-        }
-        return userRepository.save(user);
-    }
+   private final UserRepository userRepository;
+
+   public SignUp(UserRepository userRepository) {
+       this.userRepository = userRepository;
+   }
+
+   @PostMapping
+   public User register(@Valid @RequestBody UserDTO request) {
+       User user = new User();
+       request.setName(user.getName());
+       request.setEmail(user.getEmail());
+       request.setPassword(user.getPassword());
+       
+       return userRepository.save(user);
+   }
 
     @GetMapping
     public List<User> findAll() {
