@@ -1,6 +1,8 @@
 package com.agata.login.dto;
 
-public class LoginRequest {
+public class UserDTO {
+
+    private String name;
     private String email;
     private String password;
 
