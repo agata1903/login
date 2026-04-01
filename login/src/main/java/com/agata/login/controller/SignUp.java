@@ -22,9 +22,9 @@ public class SignUp {
    @PostMapping
    public User register(@Valid @RequestBody UserDTO request) {
        User user = new User();
-       request.setName(user.getName());
-       request.setEmail(user.getEmail());
-       request.setPassword(user.getPassword());
+       user.setName(request.getName());
+       user.setEmail(request.getEmail());
+       user.setPassword(request.getPassword());
        
        return userRepository.save(user);
    }
